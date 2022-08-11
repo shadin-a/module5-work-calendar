@@ -29,7 +29,51 @@ const allData = [ // each one of these is a data object
         buttonID: 'saveBtn1',
         textAreaID: "txtArea1",
       },
+      {
+        index: 2,
+        time: "11am",
+        buttonID: 'saveBtn2',
+        textAreaID: "txtArea2",
+      },
+      {
+        index: 3,
+        time: "12pm",
+        buttonID: 'saveBtn3',
+        textAreaID: "txtArea3",
+      },
+      {
+        index: 4,
+        time: "1pm",
+        buttonID: 'saveBtn4',
+        textAreaID: "txtArea4",
+      },
+      {
+        index: 5,
+        time: "2pm",
+        buttonID: 'saveBtn5',
+        textAreaID: "txtArea5",
+      },
+      {
+        index: 6,
+        time: "3pm",
+        buttonID: 'saveBtn6',
+        textAreaID: "txtArea6",
+      },
+      {
+        index: 7,
+        time: "4pm",
+        buttonID: 'saveBtn7',
+        textAreaID: "txtArea7",
+      },
+      {
+        index: 8,
+        time: "5pm",
+        buttonID: 'saveBtn8',
+        textAreaID: "txtArea8",
+      },
 ]; 
+
+ 
 
 //EVENT LISTENER
 var saveBtns = document.getElementsByClassName("saveBtns");
