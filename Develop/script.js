@@ -1,20 +1,19 @@
-//current hour is red 
-//past hour is grey 
-//future hours is green
-
 //GLOBAL VARIABLES
-var today = moment();
-
-console.log(
-    moment()
-     .startOf("day")
-     .hour(9)
-     .minute(0)
-     .format()
- );
+var textInput = {
+    "txtArea0": "",
+    "txtArea1": "",
+    "txtArea2": "",
+    "txtArea3": "",
+    "txtArea4": "",
+    "txtArea5": "",
+    "txtArea6": "",
+    "txtArea7": "",
+    "txtArea8": "",
+};
 
 //GLOBAL CONSTANTS
 const currentDate = document.getElementById("currentDay");
+
 const allData = [ // each one of these is a data object
     {
         index: 0,
@@ -73,8 +72,6 @@ const allData = [ // each one of these is a data object
       },
 ]; 
 
- 
-
 //EVENT LISTENER
 var saveBtns = document.getElementsByClassName("saveBtns");
 for (var i = 0; i < saveBtns.length; i++) {
@@ -82,41 +79,59 @@ for (var i = 0; i < saveBtns.length; i++) {
 }
 
 //FUNCTIONALITY
-    //TODAYS DATE FUNCTION
-currentDate.innerHTML = today;
+currentDate.innerHTML = moment();
 
 function onClickSaveButton() {
     var dataObject = allData.find((item) => item.buttonID == this.id);
-    console.log(dataObject);
     var textAreaID = dataObject.textAreaID;
-
-    //console.log('save button clicked for index: ');
     saveEvents(textAreaID);
-    renderEvents();
 };
 
 function saveEvents(textAreaID) {
-    console.log("the text area im trtying to grab: ", textAreaID);
     var eventInput = document.getElementById(textAreaID).value;
-    console.log(eventInput);
-   
-    localStorage.setItem("eventInput", JSON.stringify(eventInput));
-    console.log(localStorage);
+    textInput[textAreaID] = eventInput;
+    localStorage.setItem("textInput", JSON.stringify(textInput));
 }
 
-function renderEvents(v) {
-        if (!localStorage.getItem(v)) {
-            return "";// You can change this to your defualt value. 
-        }
-        return localStorage.getItem(v);
+window.onload = function() {
+    setRowColors(9, 'row0');
+    for (var i = 0; i < allData.length; i++) {
+        var hour = i + 9;
+        var rowIdName = 'row' + i;
+        setRowColors(hour, rowIdName);
     }
 
+    var savedTextInput = localStorage.getItem("textInput");
+    if (savedTextInput !== null) {
+        textInput = JSON.parse(savedTextInput);  
+    }
 
+    document.getElementById("txtArea0").innerHTML = textInput.txtArea0;
+    document.getElementById("txtArea1").innerHTML = textInput.txtArea1;
+    document.getElementById("txtArea2").innerHTML = textInput.txtArea2;
+    document.getElementById("txtArea3").innerHTML = textInput.txtArea3;
+    document.getElementById("txtArea4").innerHTML = textInput.txtArea4;
+    document.getElementById("txtArea5").innerHTML = textInput.txtArea5;
+    document.getElementById("txtArea6").innerHTML = textInput.txtArea6;
+    document.getElementById("txtArea7").innerHTML = textInput.txtArea7;
+    document.getElementById("txtArea8").innerHTML = textInput.txtArea8;
+}
 
-  
+function setRowColors(hour, rowId) {
+    const currentHour = moment();
+    var color = null;
+    var rowHour = moment()
+    .startOf("day")
+    .hour(hour)
+    .minute(0);
 
+    if (currentHour.hour() == rowHour.hour()) {
+        color = "red"; 
+    } else if (currentHour.hour() > rowHour.hour()) {
+        color = "grey";
+    } else { 
+       color = "green";
+    }
 
-
-
-
-
+    document.getElementById(rowId).style.backgroundColor = color;
+}
