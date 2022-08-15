@@ -13,7 +13,6 @@ var textInput = {
 
 //GLOBAL CONSTANTS
 const currentDate = document.getElementById("currentDay");
-
 const allData = [ // each one of these is a data object
     {
         index: 0,
